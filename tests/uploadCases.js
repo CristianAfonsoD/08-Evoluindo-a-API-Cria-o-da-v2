@@ -131,6 +131,24 @@ export const postCases = [
     code: "UPLOAD_NOT_CONFIGURED",
     calls: 0,
   },
+  {
+    title: "POST multipart incompleto",
+    raw: "",
+    contentType: "multipart/form-data; boundary=aula09",
+    status: 400,
+    code: "VALIDATION_ERROR",
+    message: "Multipart inválido: confira corpo e boundary",
+    calls: 0,
+  },
+  {
+    title: "POST boundary ausente",
+    raw: "abc",
+    contentType: "multipart/form-data",
+    status: 400,
+    code: "VALIDATION_ERROR",
+    message: "Multipart inválido: confira corpo e boundary",
+    calls: 0,
+  },
 ];
 export const patchCases = [
   {

@@ -46,6 +46,15 @@ export default function uploadPhoto(req, res, next) {
         ),
       );
     }
+    // ADICIONADO: erros conhecidos do envelope multipart são entrada inválida.
+    if (
+      error?.message === "Unexpected end of form" ||
+      error?.message === "Multipart: Boundary not found"
+    ) {
+      return next(
+        new ValidationError("Multipart inválido: confira corpo e boundary"),
+      );
+    }
     next(error);
   });
 }
