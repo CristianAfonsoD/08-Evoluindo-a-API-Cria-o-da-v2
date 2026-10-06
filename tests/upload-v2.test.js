@@ -59,11 +59,12 @@ async function fixture() {
 
 /** Monta campos/arquivos reais do formulário, inclusive multipart vazio. */
 async function buildRequest(method, url, fields, scenario) {
-  if (scenario.raw !== undefined)
-    return request(apiServer)
-      [method](url)
+  if (scenario.raw !== undefined) {
+    const rawRequest = request(apiServer)[method](url);
+    return rawRequest
       .set("Content-Type", scenario.contentType)
       .send(scenario.raw);
+  }
   if (scenario.json) return request(apiServer)[method](url).send(fields);
   // Lê as fixtures antes do envio; fetch preserva a resposta HTTP antecipada
   // quando a rota pendente ainda não consome o corpo multipart.
